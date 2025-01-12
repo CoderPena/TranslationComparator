@@ -1,20 +1,18 @@
 # Translation Comparator
 
-## Descrição
-Este programa compara um documento traduzido em inglês com sua versão original em português. Ele utiliza **Python** e bibliotecas como `docx`, `deep_translator`, `difflib` e `tqdm` para gerar relatórios de diferenças de tradução.
+## Description
+This program compares a translated English document with its original Portuguese version. It uses **Python** and libraries like `docx`, `deep_translator`, `difflib`, and `tqdm` to generate translation difference reports.
 
-## Funcionalidades
-- Extração de texto de documentos `.docx`.
-- Tradução automática com o **GoogleTranslator**.
-- Comparação de similaridade com base no limiar configurável.
-- Geração de relatórios detalhados.
+## Features
+- Text extraction from `.docx` documents.
+- Automatic translation with **GoogleTranslator**.
+- Similarity comparison based on a configurable threshold.
+- Generation of detailed reports.
 
-## Configuração
-### Pré-requisitos:
+## Setup
+### Prerequisites:
 - Python 3.7+
-- Instalar as bibliotecas requeridas:
+- Install the required libraries:
   ```bash
   pip install python-docx deep-translator tqdm
-
-
 
