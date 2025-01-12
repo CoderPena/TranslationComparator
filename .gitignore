@@ -1,7 +1,10 @@
 *.TXT
 *.txt
 *.DOCX
+<<<<<<< HEAD
 *.docx
 *.DOC
 *.doc
+=======
+>>>>>>> 7b55a56 (Removendo a pasta Archive do controle do Git e adicionando ao .gitignore)
 Archive/
