@@ -7,11 +7,16 @@ from tqdm import tqdm  # Biblioteca para barra de progresso
 SIMILARITY_THRESHOLD = 0.9  # Limiar de similaridade
 
 # Caminhos dos arquivos
-pt_file = "/home/pena/Downloads/Tema_9_-_ESPERANÇA2024-12-06_16_56_37-1.docx"
-en_file = "/home/pena/Downloads/Tema_9_-_ESPERANÇA2024-12-06_16_56_37-1 PTBR-EN.docx"
+file_path = "/home/pena/Documents/TRPF - Tradução/TRPF026/"
+pt_file_name = "PROPOSTA_EAD.docx"
+en_file_name = "PROPOSTA_EAD PTBR-EN.docx"
+df_file_name = "PROPOSTA_EAD PTBR-EN_DIFF.docx"
+
+pt_file = file_path + pt_file_name
+en_file = file_path + en_file_name
 # Gerar relatório
-diff_report_path = "/home/pena/Downloads/comparacao_traducao_relatorio.txt"
-en_file_diff = "/home/pena/Downloads/Tema_9_-_ESPERANÇA2024-12-06_16_56_37-1_PTBR-EN_DIFF.docx"
+diff_report_path = file_path + "comparacao_traducao_relatorio.txt"
+en_file_diff = file_path + df_file_name
 
 # Função para carregar texto de um arquivo DOCX com barra de progresso
 def extract_text_from_docx(file_path):
@@ -118,8 +123,16 @@ with open(diff_report_path, "w", encoding="utf-8") as report:
                 cell = table.rows[row_index - 1].cells[col_index - 1]
 
                 # Adicionar o texto original e a sugestão de correção dentro da mesma célula
-                cell.text = f"{en_text}\n\n[SUGESTÃO] #{suggestion_number}\n------->PT ORIGINAL\n{pt_text}\n------->TRAD SUGERIDA\n{translated_line}"
-                suggestion_number += 1                
+                cell.text = f"\n\n[SUGESTÃO] #{suggestion_number}\n------->PT ORIGINAL\n{pt_text}\n------->EN ORIGINAL\n{en_text}\n------->TRAD SUGERIDA\n{translated_line}\n"
+                suggestion_number += 1
+            elif en_type == "parágrafo":
+                # Modificar o parágrafo correspondente e adicionar a sugestão
+                paragraph_index = en_metadata[0] - 1  # Índice baseado em 0
+                paragraph = doc_en.paragraphs[paragraph_index]
+
+                # Adicionar o texto original e a sugestão de correção dentro do parágrafo
+                paragraph.text = f"\n\n[SUGESTÃO] #{suggestion_number}\n------->PT ORIGINAL\n{pt_text}\n------->EN ORIGINAL\n{paragraph.text}\n------->TRAD SUGERIDA\n{translated_line}\n"
+                suggestion_number += 1
 
     else:
         report.write("Os textos estão alinhados e semelhantes!\n")
@@ -129,3 +142,16 @@ with open(diff_report_path, "w", encoding="utf-8") as report:
 
 print(f"Relatório de diferenças salvo em: {diff_report_path}")
 print(f"Arquivo DIFF salvo em: {en_file_diff}")
+
+# Exibição final no console
+print("\nResumo do processamento:")
+print(f"Arquivo em Português: {pt_file}")
+print(f"Palavras lidas: {pt_word_count}")
+
+print(f"\nArquivo em Inglês: {en_file}")
+print(f"Palavras lidas: {en_word_count}")
+
+print(f"\nTotal de comparações realizadas: {total_comparisons}")
+print(f"Total de diferenças encontradas: {len(differences)}")
+print("\nProcessamento concluído.")
+
