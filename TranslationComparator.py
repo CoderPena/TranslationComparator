@@ -109,9 +109,9 @@ with open(diff_report_path, "w", encoding="utf-8") as report:
                 report.write(f"Tipo: Tabela\nNúmero da tabela: {pt_metadata[0]}\nLinha da tabela: {pt_metadata[1]}\nColuna da tabela: {pt_metadata[2]}\n")
 
             report.write(f"Número da Célula: {diff_index}\n")
-            report.write(f"Português: {pt_text}\n")
-            report.write(f"Inglês Original: {en_text}\n")
-            report.write(f"Tradução para Inglês: {translated_line}\n")
+            report.write(f"PT ORIGINAL: {pt_text}\n")
+            report.write(f"EN ORIGINAL: {en_text}\n")
+            report.write(f"TRAD SUGERIDA: {translated_line}\n")
             report.write(f"Similaridade: {similarity:.2%}\n")
             report.write("-" * 50 + "\n")
 
